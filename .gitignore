@@ -1,0 +1,36 @@
+  # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+game-shop-client/node_modules
+game-shop-server/node_modules
+game-shop-client/.pnp
+game-shop-client/.pnp.js
+
+# testing
+game-shop-client/coverage
+
+# next.js
+game-shop-client/.next/
+game-shop-client/out/
+
+# production
+game-shop-client/build
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+game-shop-client/npm-debug.log*
+game-shop-client/yarn-debug.log*
+game-shop-client/yarn-error.log*
+
+# local env files
+game-shop-client/.env.local
+game-shop-server/.env
+game-shop-client/.env.development.local
+game-shop-client/.env.test.local
+game-shop-client/.env.production.local
+
+# vercel
+game-shop-client/.vercel
