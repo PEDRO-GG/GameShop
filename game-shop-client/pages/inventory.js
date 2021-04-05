@@ -1,16 +1,24 @@
 import Head from "next/head";
+import InventoryTable from "../components/InventoryTable";
 
-const Inventory = () => {
-  //Fetch from a server
+export async function getStaticProps(context) {
+  const res = await fetch(`http://localhost:3002/api/v1/products/`);
+  const data = await res.json();
+  return {
+    props: { data }, // will be passed to the page component as props
+  };
+}
+
+const Inventory = ({ data }) => {
+  const products = data.data.products;
   return (
-    <div className="col-span-7">
+    <>
       <Head>
         <title>GameShop | Inventory</title>
       </Head>
-      <main className="bg-white min-h-full">
-        <h1>route: /inventory</h1>
-      </main>
-    </div>
+
+      <InventoryTable products={products} />
+    </>
   );
 };
 
