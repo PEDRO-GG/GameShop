@@ -26,11 +26,11 @@ game-shop-client/yarn-debug.log*
 game-shop-client/yarn-error.log*
 
 # local env files
-game-shop-client/.env.local
-game-shop-server/.env
-game-shop-client/.env.development.local
-game-shop-client/.env.test.local
-game-shop-client/.env.production.local
+# game-shop-client/.env.local
+# game-shop-server/.env
+# game-shop-client/.env.development.local
+# game-shop-client/.env.test.local
+# game-shop-client/.env.production.local
 
 # vercel
 game-shop-client/.vercel

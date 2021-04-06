@@ -1,5 +1,5 @@
 import Head from "next/head";
-import InventoryTable from "../components/InventoryTable";
+import InventoryTable from "../../components/InventoryTable";
 
 export async function getStaticProps(context) {
   const res = await fetch(`http://localhost:3002/api/v1/products/`);

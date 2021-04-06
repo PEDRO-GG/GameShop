@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const InventoryTable = ({ products }) => {
   return (
     <table className="border-collapse w-full">
@@ -64,12 +66,11 @@ const InventoryTable = ({ products }) => {
                 <span className="lg:hidden absolute top-0 left-0 bg-blue-200 px-2 py-1 text-xs font-bold uppercase">
                   Actions
                 </span>
-                <a
-                  href="#"
-                  className="inline-block mx-2 px-2 py-2 text-xs font-medium leading-3 text-center text-white uppercase transition bg-blue-700 rounded shadow ripple hover:shadow-lg hover:bg-blue-800 focus:outline-none"
-                >
-                  Edit
-                </a>
+                <Link href={`/inventory/${product.id}`}>
+                  <a className="inline-block mx-2 px-2 py-2 text-xs font-medium leading-3 text-center text-white uppercase transition bg-blue-700 rounded shadow ripple hover:shadow-lg hover:bg-blue-800 focus:outline-none">
+                    Edit
+                  </a>
+                </Link>
                 <a
                   href="#"
                   className="inline-block mx-2 px-2 py-2 text-xs font-medium leading-3 text-center text-white uppercase transition bg-red-500 rounded shadow ripple hover:shadow-lg hover:bg-red-600 focus:outline-none"

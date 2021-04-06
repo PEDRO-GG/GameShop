@@ -7,7 +7,7 @@ const Layout = ({ children }) => {
   const sidebarItems = [
     { href: "/billing", title: "Billing" },
     { href: "/inventory", title: "Inventory" },
-    { href: "/unitConverter", title: "Unit Converter" },
+    { href: "/unit-converter", title: "Unit Converter" },
   ];
   const [activeIndex, setActiveIndex] = useState(0);
   return (
