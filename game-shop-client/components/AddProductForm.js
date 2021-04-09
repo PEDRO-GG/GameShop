@@ -1,13 +1,19 @@
 import { useState } from "react";
 import Input from "./Input";
 import SelectInput from "./SelectInput";
+import { useRouter } from "next/router";
 
-const AddProductForm = ({ products, setProducts }) => {
+const AddProductForm = () => {
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [status, setStatus] = useState("Available");
   const [totalSold, setTotalSold] = useState(0);
-  const [totalRevenue, setTotalRevenue] = useState("");
+  const [totalRevenue, setTotalRevenue] = useState("0");
+
+  const router = useRouter();
+  const refreshData = () => {
+    router.replace(router.asPath);
+  };
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -34,7 +40,14 @@ const AddProductForm = ({ products, setProducts }) => {
         console.error("Error:", error);
       });
 
-    setProducts([...products, data]);
+    //Reset the form
+    setName("");
+    setPrice("");
+    setStatus("Available");
+    setTotalSold(0);
+    setTotalRevenue("0");
+
+    refreshData();
   };
 
   return (

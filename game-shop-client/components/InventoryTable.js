@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-const InventoryTable = ({ products, setProducts }) => {
+const InventoryTable = ({ products }) => {
   const router = useRouter();
   const refreshData = () => {
     router.replace(router.asPath);
@@ -22,11 +22,6 @@ const InventoryTable = ({ products, setProducts }) => {
       .catch((error) => {
         console.error("Error:", error);
       });
-    setProducts(
-      products.filter((product) => {
-        return product.id !== id;
-      })
-    );
     refreshData();
   };
   return (

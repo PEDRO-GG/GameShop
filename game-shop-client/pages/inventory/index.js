@@ -1,21 +1,16 @@
 import Head from "next/head";
-import { useContext, useEffect } from "react";
 import AddProductForm from "../../components/AddProductForm";
 import InventoryTable from "../../components/InventoryTable";
-import { ProductsContext } from "../../context/ProductsContext";
 
 const Inventory = ({ data }) => {
-  const { products, setProducts } = useContext(ProductsContext);
-  useEffect(() => {
-    setProducts(data.data.products);
-  }, [products]);
+  let products = data.data.products;
   return (
     <>
       <Head>
         <title>GameShop | Inventory</title>
       </Head>
-      <AddProductForm products={products} setProducts={setProducts} />
-      <InventoryTable products={products} setProducts={setProducts} />
+      <AddProductForm />
+      <InventoryTable products={products} />
     </>
   );
 };

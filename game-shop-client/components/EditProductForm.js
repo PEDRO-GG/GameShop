@@ -1,8 +1,8 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { useRouter } from "next/router";
 import SelectInput from "./SelectInput";
 import Input from "./Input";
-import { ProductsContext } from "../context/ProductsContext";
+
 const EditProductForm = ({ product }) => {
   const [name, setName] = useState(product.name);
   const [price, setPrice] = useState(product.price);
@@ -13,7 +13,6 @@ const EditProductForm = ({ product }) => {
   const [totalRevenue, setTotalRevenue] = useState(product.total_revenue);
 
   const router = useRouter();
-  const { products, setProducts } = useContext(ProductsContext);
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -41,7 +40,6 @@ const EditProductForm = ({ product }) => {
       });
     //Redirect the user back to the inventory page
     router.push("/inventory");
-    setProducts(products);
   };
   return (
     <>
