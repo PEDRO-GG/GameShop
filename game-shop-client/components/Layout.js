@@ -2,6 +2,7 @@ import { useState } from "react";
 import Footer from "./Footer";
 import Header from "./Header";
 import SideBar from "./SideBar";
+import { ProductsContextProvider } from "../context/ProductsContext";
 
 const Layout = ({ children }) => {
   const sidebarItems = [
@@ -20,7 +21,7 @@ const Layout = ({ children }) => {
           setActiveIndex={setActiveIndex}
         />
         <main className="overflow-auto w-full bg-white min-h-full">
-          {children}
+          <ProductsContextProvider>{children}</ProductsContextProvider>
         </main>
       </div>
 

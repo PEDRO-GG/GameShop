@@ -1,6 +1,34 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
 
-const InventoryTable = ({ products }) => {
+const InventoryTable = ({ products, setProducts }) => {
+  const router = useRouter();
+  const refreshData = () => {
+    router.replace(router.asPath);
+  };
+  const deleteProduct = (e, id) => {
+    e.preventDefault();
+    //Make a DELETE request
+    fetch(`http://localhost:3002/api/v1/products/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => response.text())
+      .then((response) => {
+        console.log("Deleted", response);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+    setProducts(
+      products.filter((product) => {
+        return product.id !== id;
+      })
+    );
+    refreshData();
+  };
   return (
     <table className="border-collapse w-full">
       <thead>
@@ -71,12 +99,13 @@ const InventoryTable = ({ products }) => {
                     Edit
                   </a>
                 </Link>
-                <a
+                <button
                   href="#"
                   className="inline-block mx-2 px-2 py-2 text-xs font-medium leading-3 text-center text-white uppercase transition bg-red-500 rounded shadow ripple hover:shadow-lg hover:bg-red-600 focus:outline-none"
+                  onClick={(e) => deleteProduct(e, product.id)}
                 >
                   Remove
-                </a>
+                </button>
               </td>
             </tr>
           );

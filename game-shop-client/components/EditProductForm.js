@@ -1,9 +1,8 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useRouter } from "next/router";
 import SelectInput from "./SelectInput";
 import Input from "./Input";
-import { route } from "next/dist/next-server/server/router";
-
+import { ProductsContext } from "../context/ProductsContext";
 const EditProductForm = ({ product }) => {
   const [name, setName] = useState(product.name);
   const [price, setPrice] = useState(product.price);
@@ -12,7 +11,10 @@ const EditProductForm = ({ product }) => {
   );
   const [totalSold, setTotalSold] = useState(product.total_sold);
   const [totalRevenue, setTotalRevenue] = useState(product.total_revenue);
+
   const router = useRouter();
+  const { products, setProducts } = useContext(ProductsContext);
+
   const onSubmit = (e) => {
     e.preventDefault();
     let data = {
@@ -24,7 +26,7 @@ const EditProductForm = ({ product }) => {
     };
     //Make a PUT request with the new data
     fetch(`http://localhost:3002/api/v1/products/${product.id}`, {
-      method: "PUT", // or 'PUT'
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
@@ -39,6 +41,7 @@ const EditProductForm = ({ product }) => {
       });
     //Redirect the user back to the inventory page
     router.push("/inventory");
+    setProducts(products);
   };
   return (
     <>
