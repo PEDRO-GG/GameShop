@@ -1,9 +1,21 @@
 import Head from "next/head";
+import { useState } from "react";
+import ProductCard from "../../components/ProductCard";
 
 const Billing = () => {
   // const products = data.data.products; //An array of objects; each object is a product.
   //Any HTML in the return() below will be displayed to the webpage
 
+  const [order, setOrder] = useState([]);
+  const addToOrder = (product) => {
+    setOrder((order) => [...order, product]); //async function so console.log below it runs first
+  };
+  const submitOrder = () => {
+    let orderPrices = order.map((product) => Number(product.price));
+    let orderTotal = orderPrices.reduce((acc, cur) => acc + cur);
+    setOrder([]);
+    alert(`Your order total is ${orderTotal}`);
+  };
   let products = [
     {
       id: "58",
@@ -67,33 +79,36 @@ const Billing = () => {
       <Head>
         <title>GameShop | Billing</title>
       </Head>
-      <h1>These are all of the products:</h1>
-      {products.map((product) => {
-        return (
-          <div key={product.id}>
-            <p>---------------</p>
-            <p>
-              <b>ID:</b> {product.id}
-            </p>
-            <p>
-              <b>Name:</b> {product.name}
-            </p>
-            <p>
-              <b>Price:</b> {product.price}
-            </p>
-            <p>
-              <b>Status:</b> {product.status}
-            </p>
-            <p>
-              <b>Total Sold:</b> {product.total_sold}
-            </p>
-            <p>
-              <b>Total Revenue:</b> {product.total_revenue}
-            </p>
-            <p>---------------</p>
-          </div>
-        );
-      })}
+      <div className="grid grid-cols-1 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-1 m-10">
+        {products.map((product) => {
+          return (
+            <ProductCard
+              key={product.id}
+              product={product}
+              addToOrder={addToOrder}
+            />
+          );
+        })}
+      </div>
+      {order.length > 0 && (
+        <div className="bg-blue-500 m-10 p-5 max-w-md	mx-auto">
+          <h1 className="text-2xl text-center text-white">Your Order</h1>
+          {order.map((product) => {
+            return (
+              <div key={product.id} className="m-2 p-5 bg-white">
+                <p className="text-xl">{product.name}</p>
+                <p className="text-lg font-light">${product.price}</p>
+              </div>
+            );
+          })}
+          <button
+            onClick={submitOrder}
+            className="w-24 block mx-auto bg-white p-3"
+          >
+            Submit
+          </button>
+        </div>
+      )}
     </>
   );
 };
